@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -37,5 +37,8 @@ label {
     <input type="submit" value="로그인">
   </div>
 </form>
+<div th:if="${errorCode == -1 || errorCode == -2}">
+<span th:text="${errorMsg}"></span>
+</div>
 </body>
 </html>
