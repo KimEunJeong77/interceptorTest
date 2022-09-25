@@ -2,31 +2,26 @@ package com.example.demo.system.aop;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.dao.DataAccessException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.example.demo.member.exception.IdNotFoundException;
-import com.example.demo.member.exception.PwMissMatchException;
+import lombok.extern.slf4j.Slf4j;
 
+
+@Slf4j
 @ControllerAdvice
 public class ExceptionHandler {
 	
-	@org.springframework.web.bind.annotation.ExceptionHandler(IdNotFoundException.class)
-	public ModelAndView idNotFoundExceptionHandler(HttpServletRequest request, IdNotFoundException e) {
-		  ModelAndView mv = new ModelAndView("/loginForm");
-		  
-		  mv.addObject("errorCode", -1);
-		  mv.addObject("errorMsg", e.getMessage());
-	      
-	      return mv;
-	  }
-	@org.springframework.web.bind.annotation.ExceptionHandler(PwMissMatchException.class)
-	public ModelAndView pwMissMatchExceptionHandler(HttpServletRequest request, PwMissMatchException e) {
-		  ModelAndView mv = new ModelAndView("/loginForm");
+	  @org.springframework.web.bind.annotation.ExceptionHandler(DataAccessException.class)
+	  public ModelAndView pwNotFoundExceptionHandler(HttpServletRequest request, DataAccessException e) {
+		  ModelAndView mv = new ModelAndView("/errorPage");
 		  
 		  mv.addObject("errorCode", -2);
 		  mv.addObject("errorMsg", e.getMessage());
-	      
+	      System.out.println("#####################DataAccessException###################1");
+	     	      
+	      log.error("Request: " + request.getRequestURL() +"\n"+ " raised " + e);
 	      return mv;
 	  }
 }

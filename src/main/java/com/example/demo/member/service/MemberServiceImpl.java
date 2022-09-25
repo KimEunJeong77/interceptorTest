@@ -10,7 +10,9 @@ import com.example.demo.member.exception.IdNotFoundException;
 import com.example.demo.member.exception.PwMissMatchException;
 import com.example.demo.member.mapper.MemberMapper;
 
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Service
 public class MemberServiceImpl implements MemberService {
 	@Autowired
@@ -31,6 +33,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void login(String id, String pw){
 		// TODO Auto-generated method stub
+		log.info("id,pw:",id,pw);
 		MemberDTO dto=memberMapper.selectMemberDetail(id);
 		if(dto==null) throw new IdNotFoundException("존재하지않는ID");
 		else 

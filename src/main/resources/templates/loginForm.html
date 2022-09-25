@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -20,11 +20,29 @@ label, input {
 label {
     padding-right: 10px;
 }
-
 </style>
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+<script>
+$(document).ready(function(){
+	$("#loginButton").click(loginFunc);
+});
+function loginFunc(){
+	$.ajax({
+		url: "/login",
+	    data:{"id":$("#id").val(),"pw":$("#pw").val()},
+		dataType:"json",
+	    success: function(data) {
+	    	console.log(data);
+	    	if(data.errorCode==-1)
+	    		$("#msgContainer").html(data.errorMsg);
+	    	else
+	    		location.href="/member/list"; 
+	    }
+	});
+}
+</script>
 </head>
 <body>
-<form action="/login" method="get" class="form-example">
   <div class="form-example">
     <label for="id"> ID : </label>
     <input type="text" name="id" id="id" required>
@@ -34,11 +52,8 @@ label {
     <input type="text" name="pw" id="pw" required>
   </div>
   <div class="form-example">
-    <input type="submit" value="로그인">
+    <input type="button" value="로그인" id="loginButton">
   </div>
-</form>
-<div th:if="${errorCode == -1 || errorCode == -2}">
-<span th:text="${errorMsg}"></span>
-</div>
+	<span id="msgContainer"></span>
 </body>
 </html>
