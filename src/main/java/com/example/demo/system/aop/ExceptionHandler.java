@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class ExceptionHandler {
 	
 	  @org.springframework.web.bind.annotation.ExceptionHandler(DataAccessException.class)
-	  public ModelAndView pwNotFoundExceptionHandler(HttpServletRequest request, DataAccessException e) {
+	  public ModelAndView exceptionHandler(HttpServletRequest request, DataAccessException e) {
 		  ModelAndView mv = new ModelAndView("/errorPage");
 		  
 		  mv.addObject("errorCode", -2);
