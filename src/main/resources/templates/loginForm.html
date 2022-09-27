@@ -33,7 +33,7 @@ function loginFunc(){
 		dataType:"json",
 	    success: function(data) {
 	    	console.log(data);
-	    	if(data.errorCode==-1)
+			if(data.errorCode==-1)
 	    		$("#msgContainer").html(data.errorMsg);
 	    	else
 	    		location.href="/member/list"; 

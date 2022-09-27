@@ -19,7 +19,7 @@ public class ExceptionHandler {
 		  
 		  mv.addObject("errorCode", -2);
 		  mv.addObject("errorMsg", e.getMessage());
-	      System.out.println("#####################DataAccessException###################1");
+	      log.info("#####################DataAccessException###################");
 	     	      
 	      log.error("Request: " + request.getRequestURL() +"\n"+ " raised " + e);
 	      return mv;
